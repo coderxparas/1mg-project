@@ -9,9 +9,10 @@ class Pokedex extends React.Component {
       isLoaded: false,
       items: [],
       currentPage:1,
+      count:0
     
   }
-    nextpage=()=>{          
+    nextPage=()=>{          
      let cnow=this.state.count;      
       cnow+=50;
       console.log(cnow);
@@ -23,7 +24,7 @@ class Pokedex extends React.Component {
        this.componentDidMount();
   }
 
-  prevpage=()=>{          
+  prevPage=()=>{          
      let cnow=this.state.count;    
      if(cnow>50){  
       cnow-=50;
@@ -38,7 +39,7 @@ class Pokedex extends React.Component {
   }
 
   componentDidMount() {
-      var url=`https://pokeapi.co/api/v2/pokemon?offset=20&limit=20`;
+      var url=`https://pokeapi.co/api/v2/pokemon?offset=${this.state.count}&limit=20`;
     fetch(url)
       .then(res => res.json())
       .then(
@@ -66,16 +67,20 @@ class Pokedex extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
+          <>
         <ul>
           {items.map((item,ind) => (
-              <>              
+                            
             <li key={ind}>
               <text className={styles.poke}>{item.name}</text> <Link className={styles.link}to='/pokemon' onClick={()=>{localStorage.setItem('url', item.url);}}>Abilities</Link>
             </li>
             
-            </>
+            
           ))}
         </ul>
+        <button onClick={this.nextPage}>Next</button>
+        <button onClick={this.prevPage}>Prev</button>
+        </>
       );
     }
   }
