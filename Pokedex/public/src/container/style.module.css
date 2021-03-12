@@ -1,0 +1,15 @@
+body{
+    margin: 20px;
+    background-color: beige;
+}
+.link{
+    text-decoration:none;
+    color:brown;
+    margin-left:20px;
+    font-size: 20px;
+}
+.poke{
+    color:blueviolet;
+    margin-left:20px;
+    font-size: 30px;
+}
